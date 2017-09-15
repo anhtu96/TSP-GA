@@ -9,7 +9,7 @@ distance = [ 0      0.730 0.640 0.840 0.800 0.430 0.380 1.010;
              0.380  0.540 0.920 0.570 0.460 0.390 0      0.660;
              1.010  0.470 1.160 0.900 0.200 0.690 0.690  0];
 len = length(distance);
-popsize = 500;
+popsize = 100;
 distance_sum = zeros(popsize,1);
 p = zeros(popsize,1);
 pm = 0.01;
@@ -28,7 +28,7 @@ crossover_mat = roulette_selection(p);
 for i = 1:popsize
     parent(i,:) = pop(crossover_mat(i),:);
 end
-for tmp = 1:1000
+for tmp = 1:500
 %crossover
 for i = 1:(popsize/2)
     offspring(i*2-1,:) = parent(i*2-1,:);
