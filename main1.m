@@ -1,4 +1,4 @@
-clear;
+clear; clc;
 %% distance table
 distance = [ 0      730 640 840 800 430 380 1010;
              730  0     710 1040 500 300 540 470;
@@ -52,17 +52,25 @@ for cnt = 1:iteration
     % Reproduction default offspring = parent
     offspring = parent;
     % Crossover
-    for i = 1:(popsize/2)
-        offspring(i*2-1,:) = parent(i*2-1,:);
-        offspring(i*2,:) = parent(i*2,:);
-        if (rand <= pc)
-            cross_point = randi([2 6]);
-            m = setdiff(parent(i*2,:),parent(i*2-1,1:cross_point),'stable');
-            n = setdiff(parent(i*2-1,:),parent(i*2,1:cross_point),'stable');
-            offspring(i*2-1,(cross_point + 1):len) =  m;
-            offspring(i*2,(cross_point + 1):len) = n;
-        end
-    end
+     for i = 1:(popsize/2)
+         if (rand <= pc)
+             cross_point = randi([2 6]);
+             for j = 1:cross_point
+                 m = find(offspring(i*2-1,:)==parent(i*2,j),1);
+                 if (m > j)
+                     offspring(i*2-1,m) = offspring(i*2-1,j);
+                 end
+                 offspring(i*2-1,j) = parent(i*2,j);
+ 
+                 n = find(offspring(i*2,:)==parent(i*2-1,j),1);        
+                 if (n > j)
+                     offspring(i*2,n) = offspring(i*2,j);
+                 end        
+                 offspring(i*2,j) = parent(i*2-1,j);
+             end
+         end
+     end
+
 
     % Mutation
     for i = 1:popsize

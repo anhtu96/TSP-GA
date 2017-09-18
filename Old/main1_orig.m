@@ -10,7 +10,7 @@ distance = [ 0      730 640 840 800 430 380 1010;
              380  540 920 570 460 390 0      660;
              1010 470 1160 900 200 690 690  0];
 len = length(distance);
-popsize = 200;
+popsize = 100;
 iteration = 50;
 distance_sum = zeros(popsize,1);
 p = zeros(popsize,1);
